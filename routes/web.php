@@ -12,3 +12,8 @@
 */
 
 Route::get('/', ["uses" => "HomeController@Index"]);
+
+Route::post('/enqueue', ["uses" => "HomeController@EnqueueResource"]);
+
+Route::get('/resource/${id}', ["uses" => "HomeController@GetResource"]);
+Route::get('/resource/${id}/download', ["uses" => "HomeController@DownloadResource"]);
