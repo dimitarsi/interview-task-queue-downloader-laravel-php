@@ -18,6 +18,10 @@ class HomeController extends Controller
     public function Index(Request $request) {
         $resources = WebResource::all();
 
+        if($request->wantsJson()) {
+            return response()->json($resources);
+        }
+
         return view("home")
                 ->with("resources", $resources)
                 ->with("message", session()->pull("message", ""));
@@ -35,10 +39,8 @@ class HomeController extends Controller
         $resource = WebResource::create($request->all());
 
         if($request->wantsJson()) {
-            // Return Created at Route
-            return response(json_encode($resource), 201, [
+            return response()->json($resource, 201, [
                 "Location" => url("/resource/{$resource->id}"),
-                "Content-Type" => "application/json"
             ]);
         }
 
@@ -48,6 +50,7 @@ class HomeController extends Controller
     public function GetResource(Request $request, $id)
     {
         $resource = WebResource::findOrFail($id);
+
         return response()->json($resource);
     }
 
@@ -55,6 +58,7 @@ class HomeController extends Controller
     {
         $resource = WebResource::findOrFail($id);
         $file = Storage::disk("downloads")->path($resource->file_name);
+
         return response()->download($file, $resource->download_name);
     }
 
