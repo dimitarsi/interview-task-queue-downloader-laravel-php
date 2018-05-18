@@ -11,17 +11,17 @@
 |
 */
 
-Route::get('/', ["uses" => "HomeController@Index"]);
+Route::get('/', ["uses" => "HomeController@index"]);
 
-Route::post('/enqueue', ["uses" => "HomeController@EnqueueResource"]);
+Route::post('/enqueue', ["uses" => "HomeController@enqueueResource"]);
 
-Route::get('/resource/{id}', ["uses" => "HomeController@GetResource"]);
+Route::get('/resource/{id}', ["uses" => "HomeController@getResource"]);
 
-Route::get('/resource/{id}/retry', ["uses" => "HomeController@RetryDownload"])
+Route::get('/resource/{id}/retry', ["uses" => "HomeController@retryDownload"])
     ->name("retry");
 
-Route::get('/resource/{id}/download', ["uses" => "HomeController@DownloadResource"])
+Route::get('/resource/{id}/download', ["uses" => "HomeController@downloadResource"])
     ->name("download");
 
-Route::get('/resource/{id}/delete', ["uses" => "HomeController@DeleteResource"])
+Route::get('/resource/{id}/delete', ["uses" => "HomeController@deleteResource"])
     ->name("delete");

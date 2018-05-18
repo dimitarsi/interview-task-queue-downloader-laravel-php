@@ -14,7 +14,7 @@ use App\Events\EnqueueDownloading;
 
 class HomeController extends Controller
 {
-    public function Index(Request $request) {
+    public function index(Request $request) {
         $resources = WebResource::all();
 
         if($request->wantsJson()) {
@@ -26,7 +26,7 @@ class HomeController extends Controller
                 ->with("message", session()->pull("message", ""));
     }
 
-    public function EnqueueResource(WebResourceRequest $request)
+    public function enqueueResource(WebResourceRequest $request)
     {
         $url = $request->get("url");
         Log::info("Pending resource added {$url}");
@@ -42,14 +42,14 @@ class HomeController extends Controller
         return response()->redirectTo("/");
     }
 
-    public function GetResource(Request $request, $id)
+    public function getResource(Request $request, $id)
     {
         $resource = WebResource::findOrFail($id);
 
         return response()->json($resource);
     }
 
-    public function DownloadResource(Request $request, $id)
+    public function downloadResource(Request $request, $id)
     {
         $resource = WebResource::findOrFail($id);
         $file = Storage::disk("downloads")->path($resource->file_name);
@@ -57,7 +57,7 @@ class HomeController extends Controller
         return response()->download($file, $resource->download_name);
     }
 
-    public function RetryDownload(Request $request, $id)
+    public function retryDownload(Request $request, $id)
     {
         $resource = WebResource::findOrFail($id);
         $resource->update([
@@ -69,7 +69,7 @@ class HomeController extends Controller
         return response("", 200);
     }
 
-    public function DeleteResource(Request $request, $id)
+    public function deleteResource(Request $request, $id)
     {
         $resource = WebResource::findOrFail($id);
         $resource->delete();
