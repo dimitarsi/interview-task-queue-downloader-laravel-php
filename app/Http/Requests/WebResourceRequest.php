@@ -13,7 +13,7 @@ class WebResourceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class WebResourceRequest extends FormRequest
     public function rules()
     {
         return [
-            "url" => "require|URL"
+            "url" => "required|URL",
+            "download_name" => "required|"
         ];
     }
 }

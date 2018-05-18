@@ -28,11 +28,14 @@ class EnqueueListener implements ShouldQueue
      */
     public function handle(EnqueueDownloading $event)
     {
-        Log::info("Start downloading {$event->webresource->url}");
+
         $client = new Client;
         $resource_path = storage_path("app/downloads/{$event->webresource->file_name}");
+
         Log::info("Start downloading {$event->webresource->url}; pipe to $resource_path");
         $event->webresource->status = "downloading";
+        $event->webresource->save();
+
         try {
             $client->request("GET", $event->webresource->url, ['sink' => $resource_path]);
             $event->webresource->status = "complete";
