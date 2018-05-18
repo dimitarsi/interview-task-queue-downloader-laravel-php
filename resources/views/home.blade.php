@@ -10,6 +10,7 @@
 </head>
 <body>
     <h1>Download</h1>
+
     <form action="{{url("/enqueue")}}" method="post">
         {{ csrf_field() }}
         <div class="row">
@@ -20,6 +21,9 @@
             </label>
         </div>
     </form>
+
+    @include("errors")
+
     <h1>Current Jobs</h1>
     @section("content")
         <div id="current-jobs">

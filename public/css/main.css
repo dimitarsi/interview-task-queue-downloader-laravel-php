@@ -75,3 +75,11 @@
     font-size: 11px;
     color: #fff;
 }
+
+.error {
+    background: crimson;
+    border-color: #d58512;
+    color: #fff;
+    padding: 3px 8px;
+    display: inline-block;
+}

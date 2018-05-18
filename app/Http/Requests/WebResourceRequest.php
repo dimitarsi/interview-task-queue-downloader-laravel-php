@@ -25,7 +25,7 @@ class WebResourceRequest extends FormRequest
     {
         return [
             "url" => "required|URL",
-            "download_name" => "required|"
+            "download_name" => "required"
         ];
     }
 }
