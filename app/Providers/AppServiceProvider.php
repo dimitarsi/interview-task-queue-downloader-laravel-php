@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Models\WebResource;
 use App\Events\EnqueueDownloading;
+use Ramsey\Uuid\Uuid;
 use Storage;
 use DB;
 
@@ -19,6 +20,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        WebResource::creating(function($model) {
+            $model->file_name = Uuid::uuid4()->toString();
+        });
 
         WebResource::created(function($model) {
             event(new EnqueueDownloading($model));

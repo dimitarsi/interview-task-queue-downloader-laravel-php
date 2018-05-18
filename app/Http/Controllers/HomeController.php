@@ -6,7 +6,6 @@ use App\Http\Requests\WebResourceRequest;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Ramsey\Uuid\Uuid;
 use Log;
 
 use App\Models\WebResource;
@@ -31,10 +30,6 @@ class HomeController extends Controller
     {
         $url = $request->get("url");
         Log::info("Pending resource added {$url}");
-
-        $request->merge([
-            "file_name" => Uuid::uuid4()->toString()
-        ]);
 
         $resource = WebResource::create($request->all());
 
