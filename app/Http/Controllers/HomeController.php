@@ -26,7 +26,7 @@ class HomeController extends Controller
                 ->with("message", session()->pull("message", ""));
     }
 
-    public function enqueueResource(WebResourceRequest $request)
+    public function createResource(WebResourceRequest $request)
     {
         $url = $request->get("url");
         Log::info("Pending resource added {$url}");

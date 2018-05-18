@@ -11,7 +11,7 @@
 <body>
     <h1>Download</h1>
 
-    <form action="{{url("/enqueue")}}" method="post">
+    <form action="{{route("create")}}" method="post">
         {{ csrf_field() }}
         <div class="row">
             <label class="link">

@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', ["uses" => "HomeController@index"]);
+Route::get('/', ["uses" => "HomeController@index"])
+    ->name("index");
 
-Route::post('/enqueue', ["uses" => "HomeController@enqueueResource"]);
+Route::post('/resource', ["uses" => "HomeController@createResource"])
+    ->name("create");
 
 Route::get('/resource/{id}', ["uses" => "HomeController@getResource"]);
 
