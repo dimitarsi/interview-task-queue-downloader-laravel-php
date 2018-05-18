@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Models\WebResource;
 use App\Events\EnqueueDownloading;
 use Storage;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
         WebResource::deleting(function($model) {
             if(Storage::disk("downloads")->exists($model->file_name)) {
                 Storage::disk("downloads")->delete($model->file_name);
+            }
+        });
+
+        WebResource::updating(function($model) {
+            if($model->isComplete()) {
+                $model->completed_at = DB::raw("CURRENT_TIME");
             }
         });
     }

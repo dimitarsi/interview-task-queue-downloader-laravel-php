@@ -13,4 +13,8 @@ class WebResource extends Model
     ];
 
     public $timestamps = false;
+
+    public function isComplete() {
+        return $this->status == "complete";
+    }
 }

@@ -34,16 +34,20 @@ class HomeController extends Controller
 
         $resource = WebResource::create($request->all());
 
-        // Return Created at Route
-        return response(json_encode($resource), 201, [
-            "Location" => url("/resource/{$resource->id}"),
-            "Content-Type" => "application/json"
-        ]);
+        if($request->wantsJson()) {
+            // Return Created at Route
+            return response(json_encode($resource), 201, [
+                "Location" => url("/resource/{$resource->id}"),
+                "Content-Type" => "application/json"
+            ]);
+        }
+
+        return response()->redirectTo("/");
     }
 
-    public function GetResource(Request $request)
+    public function GetResource(Request $request, $id)
     {
-        $resource = WebResource::findOrFail($request->get("id"));
+        $resource = WebResource::findOrFail($id);
         return response()->json($resource);
     }
 

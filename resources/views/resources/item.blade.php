@@ -1,5 +1,6 @@
 <div class="flex-c row">
     <span><img src="{{asset("imgs/{$item->status}.png")}}" alt="{{$item->status}}" title="{{$item->status}}"/></span>
+    <span><a href="{{url("/resource", $item->id)}}">{{$item->id}}</a></span>
     <span>{{$item->url}}</span>
     <span>
     @if($item->status == "complete")
