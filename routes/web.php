@@ -17,7 +17,8 @@ Route::get('/', ["uses" => "HomeController@index"])
 Route::post('/resource', ["uses" => "HomeController@createResource"])
     ->name("create");
 
-Route::get('/resource/{id}', ["uses" => "HomeController@getResource"]);
+Route::get('/resource/{id}', ["uses" => "HomeController@getResource"])
+    ->name("get");
 
 Route::get('/resource/{id}/retry', ["uses" => "HomeController@retryDownload"])
     ->name("retry");

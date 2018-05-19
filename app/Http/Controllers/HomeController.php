@@ -6,7 +6,7 @@ use App\Http\Requests\WebResourceRequest;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 use App\Models\WebResource;
 use App\Events\EnqueueDownloading;
@@ -28,10 +28,8 @@ class HomeController extends Controller
 
     public function createResource(WebResourceRequest $request)
     {
-        $url = $request->get("url");
-        Log::info("Pending resource added {$url}");
-
         $resource = WebResource::create($request->all());
+        Log::info("Pending resource added {$request->url}");
 
         if($request->wantsJson()) {
             return response()->json($resource, 201, [
