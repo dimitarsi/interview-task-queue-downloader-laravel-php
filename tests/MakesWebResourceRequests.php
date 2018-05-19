@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dimit_000
- * Date: 18.05.2018
- * Time: 11:03 PM
- */
 
 namespace Tests;
 

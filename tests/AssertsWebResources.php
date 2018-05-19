@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dimit_000
- * Date: 18.05.2018
- * Time: 11:08 PM
- */
-
 namespace Tests;
 
 use App\Models\WebResource;
