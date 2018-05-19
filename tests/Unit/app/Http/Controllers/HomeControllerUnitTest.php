@@ -56,7 +56,7 @@ class HomeControllerUnitTest extends TestCase
     public function test_create_route_returns_created_response_when_wants_json()
     {
         Queue::fake();
-        $resp = $this->postCreateResource([], ["Accept" => "application/json"]);
+        $resp = $this->postCreateResource([], $this->acceptJsonHeaders);
         $expected = array_merge(
             $this->_lastPostData,
             [
@@ -80,11 +80,11 @@ class HomeControllerUnitTest extends TestCase
     {
         Queue::fake();
         // Test valid download_name, invalid url
-        $resp = $this->postCreateResource(["url" => "invalid_url"], ["Accept" => "application/json"]);
+        $resp = $this->postCreateResource(["url" => "invalid_url"], $this->acceptJsonHeaders);
         $this->assertTrue($resp->isClientError(), "Expected to fail with status 400 <= [Status Code] < 500. Status code {$resp->status()} returned instead.");
 
         // Test valid url, invalid download_name
-        $resp = $this->postCreateResource(["download_name" => ""], ["Accept" => "application/json"]);
+        $resp = $this->postCreateResource(["download_name" => ""], $this->acceptJsonHeaders);
         $this->assertTrue($resp->isClientError(), "Expected to fail with status 400 <= [Status Code] < 500. Status code {$resp->status()} returned instead.");
     }
 
